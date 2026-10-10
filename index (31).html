@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Creative Writing Test</title>
+<style>
+:root{--ink:#2d2a4a;--pink:#ff6fa5;--blue:#4d9de0;--yellow:#ffd23f;--green:#3bb78f;--purple:#7b5cd6;--card:#ffffffee}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:"Comic Sans MS","Chalkboard SE","Trebuchet MS",sans-serif;color:var(--ink);min-height:100vh;
+background:linear-gradient(160deg,#bde7ff 0%,#e3d4ff 45%,#ffd9ea 100%);background-attachment:fixed;position:relative;overflow-x:hidden}
+.bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg span{position:absolute;font-size:2rem;opacity:.5;animation:float 9s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-22px) rotate(12deg)}}
+.cloud{position:absolute;background:#fff;border-radius:50px;opacity:.7;animation:drift 40s linear infinite}
+.cloud:before,.cloud:after{content:"";position:absolute;background:#fff;border-radius:50%}
+.cloud:before{width:50%;height:140%;top:-60%;left:15%}.cloud:after{width:40%;height:120%;top:-40%;right:12%}
+@keyframes drift{from{transform:translateX(-200px)}to{transform:translateX(110vw)}}
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:18px 14px 60px}
+.card{background:var(--card);border-radius:26px;padding:24px;box-shadow:0 10px 30px #5b3fa033;border:4px dashed #fff;margin-bottom:20px}
+header{text-align:center;border-top:8px solid var(--purple)}
+header h1{margin:4px 0;font-size:1.7rem;color:var(--purple)}
+header .addr{font-size:.85rem;margin:2px 0 10px}
+.meta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.meta span{background:var(--yellow);padding:5px 14px;border-radius:20px;font-weight:bold;font-size:.9rem}
+.info{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;text-align:left}
+.info label{font-weight:bold;font-size:.9rem}
+.info input{width:100%;font:inherit;padding:8px 12px;border:3px solid var(--blue);border-radius:14px;background:#fff}
+.instr{background:#fff6cc;border-left:8px solid var(--yellow);padding:12px 16px;border-radius:12px;margin-top:14px;font-weight:bold;text-align:left}
+h2.title{text-align:center;font-size:2rem;margin:0 0 6px;color:var(--pink);text-shadow:2px 2px 0 #fff}
+.sec h3{display:inline-block;margin:0 0 14px;padding:6px 18px;border-radius:20px;color:#fff;font-size:1.1rem}
+.s1 h3{background:var(--blue)}.s2 h3{background:var(--pink)}.s3 h3{background:var(--green)}.s4 h3{background:var(--purple)}
+.text{font-size:1.2rem;line-height:2.5}
+.text input{font:inherit;color:#c2185b;font-weight:bold;border:none;border-bottom:3px dotted var(--ink);background:#fffbe6;
+border-radius:8px 8px 0 0;padding:1px 8px;text-align:center;outline:none;transition:.2s}
+.text input:focus{background:#d8f1ff;border-bottom-color:var(--blue);box-shadow:0 3px 0 var(--blue)}
+.hint{font-size:.8rem;color:#6a5fa8;font-style:italic;white-space:nowrap}
+.progress{position:sticky;top:0;z-index:5;background:#ffffffee;border-radius:0 0 20px 20px;padding:8px 16px;box-shadow:0 4px 14px #0002;margin:0 -4px 16px;font-weight:bold;font-size:.9rem}
+.bar{height:14px;background:#e6e0ff;border-radius:10px;overflow:hidden;margin-top:4px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow),var(--green));transition:width .3s}
+.btn{font:inherit;font-weight:bold;font-size:1.2rem;border:none;border-radius:40px;padding:14px 36px;cursor:pointer;color:#fff;
+background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 6px 0 #5a3ab0;transition:.15s}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(4px);box-shadow:0 2px 0 #5a3ab0}
+.btn.alt{background:linear-gradient(135deg,var(--blue),var(--green));box-shadow:0 6px 0 #25806a}
+.center{text-align:center}
+#result{display:none}
+.hero{text-align:center}
+.hero .trophy{font-size:4rem;animation:float 3s infinite}
+.hero h2{margin:0;color:var(--purple)}
+.big{font-size:3.2rem;font-weight:bold;color:var(--pink)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:12px 0}
+.chip{background:#fff;border:3px solid var(--blue);border-radius:16px;padding:8px 14px;font-weight:bold;text-align:center}
+.chip small{display:block;font-weight:normal;font-size:.75rem}
+table{width:100%;border-collapse:collapse;font-size:.92rem;margin:8px 0 18px;background:#fff;border-radius:14px;overflow:hidden}
+th{background:var(--purple);color:#fff;padding:8px;text-align:left}
+td{padding:7px 8px;border-bottom:1px solid #e8e2ff;vertical-align:top}
+tr.sub td{background:#efe9ff;font-weight:bold}
+.ok{color:#168a5f;font-weight:bold}.no{color:#d6336c;font-weight:bold}
+.secbar{height:10px;background:#e6e0ff;border-radius:8px;overflow:hidden}.secbar i{display:block;height:100%}
+.note{background:#e8f7ff;border-radius:14px;padding:12px 16px;font-size:.88rem}
+.sign{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;font-size:.9rem}
+.sign div{border-top:2px solid var(--ink);padding-top:4px}
+@media(max-width:600px){.info,.sign{grid-template-columns:1fr}.text{font-size:1.05rem}h2.title{font-size:1.5rem}}
+@media print{body{background:#fff}.bg,.progress,.noprint{display:none!important}.card{box-shadow:none;border:1px solid #999}#test{display:none}#result{display:block!important}}
+</style>
+</head>
+<body>
+<div class="bg" id="bg"></div>
+<div class="wrap">
+
+<div id="test">
+<header class="card">
+  <div style="font-size:2.4rem">✏️</div>
+  <div class="meta">
+    <span>Term: Christmas (1st) Term</span>
+    <span>Session: 2025/2026</span><span>Subject: Creative Writing</span>
+  </div>
+  <div class="info">
+    <div><label for="pname">Name:</label><input id="pname" placeholder="Type your name here" autocomplete="off"></div>
+    <div><label for="pdate">Date:</label><input id="pdate" type="date"></div>
+  </div>
+  <div class="instr">✏️ Read through the guided composition and fill the spaces in it.</div>
+</header>
+
+<div class="progress"><span id="plabel">0 of 20 spaces filled</span><div class="bar"><i id="pbar"></i></div></div>
+
+<div class="card"><h2 class="title">🌟 All About Super Me 🌟</h2>
+
+<div class="sec s1"><h3>👧👦 About Me</h3>
+<p class="text">
+My name is <input data-k="name1" size="22" placeholder="your name"> and I am
+<input data-k="age" size="6" placeholder="age"> years old. I am a
+<input data-k="gender" size="8" placeholder="boy/girl"> <span class="hint">(boy/girl)</span> and
+I attend <input data-k="school" size="22" placeholder="school name"> School.
+I live in a nice house with my <input data-k="fam1" size="14" placeholder="who?"> and
+<input data-k="fam2" size="14" placeholder="who?">.</p></div>
+
+<div class="sec s2"><h3>🍕 My Favorites (Food, Snack &amp; Toy)</h3>
+<p class="text">
+When it comes to food, my absolute favorite meal is <input data-k="food" size="22" placeholder="my meal"> because it is so yummy!
+For my sweet snack, I love eating <input data-k="snack" size="22" placeholder="my snack">.
+When it is time to play, my favorite toy is my <input data-k="toy" size="20" placeholder="my toy">,
+and I love playing with it in the <input data-k="place" size="9" placeholder="room/garden"> <span class="hint">(room/garden)</span>.
+My favorite color is <input data-k="color" size="12" placeholder="color"> and my favorite animal is a
+<input data-k="animal" size="14" placeholder="animal">.</p></div>
+
+<div class="sec s3"><h3>🪞 How I Look (Outer Traits)</h3>
+<p class="text">
+I am growing bigger every day! I have <input data-k="hair" size="8" placeholder="short/long"> <span class="hint">(short/long)</span> hair
+and my eyes are the color <input data-k="eyes" size="12" placeholder="color">.
+I have a big, bright <input data-k="smile" size="12" placeholder="what?"> that loves to smile.</p></div>
+
+<div class="sec s4"><h3>💖 Who I Am Inside (Inner Traits)</h3>
+<p class="text">
+Inside, I am very <input data-k="kind" size="9" placeholder="kind/wicked"> <span class="hint">(kind/wicked)</span> who loves to help others.
+My friends say I am <input data-k="gen" size="11" placeholder="share/generous"> <span class="hint">(share/generous)</span> because we share our toys.
+When I face a tricky puzzle, I try my best to be <input data-k="best" size="14" placeholder="how?">.
+Every day, I feel so <input data-k="feel" size="12" placeholder="feeling"> and excited to learn.
+I know that I am special and <input data-k="special" size="14" placeholder="word">.</p></div>
+</div>
+
+<div class="center">
+  <button class="btn" id="submit">🚀 Submit My Work</button>
+  <p id="warn" style="color:#d6336c;font-weight:bold"></p>
+</div>
+</div>
+
+<div id="result">
+  <div class="card hero">
+    <div class="trophy" id="trophy">🏆</div>
+    <h2>Score Sheet</h2>
+    <p><b id="rname"></b><br><span id="rdate"></span></p>
+    <div class="big" id="rscore"></div>
+    <div id="rgrade" style="font-size:1.3rem;font-weight:bold"></div>
+    <p id="rremark" style="font-size:1.05rem"></p>
+    <div class="chips" id="chips"></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0;color:var(--purple)">Section Summary</h3>
+    <div id="secsum"></div>
+    <h3 style="color:var(--purple)">Detailed Marking</h3>
+    <div style="overflow-x:auto"><table id="detail"></table></div>
+    <div class="note"><b>Marking guide:</b> Each space carries 1 mark (20 marks in all). A mark is given when the space is filled sensibly.
+    For spaces with choices (boy/girl, short/long, room/garden, kind/wicked, share/generous) the learner must type the correct word from the choices.
+    "Inside, I am very… who loves to help others" and "My friends say I am… because we share" should be <b>kind</b> and <b>generous</b>.
+    Free-answer spaces are checked for a real, sensible word, and the teacher may review them.</div>
+    <div class="sign"><div>Teacher's Remark &amp; Signature</div><div>Parent's Signature</div></div>
+    <div class="center noprint" style="margin-top:22px">
+      <button class="btn alt" onclick="window.print()">🖨️ Print Score Sheet</button>
+      <button class="btn" onclick="location.reload()">🔄 Start Again</button>
+    </div>
+  </div>
+</div>
+</div>
+
+<script>
+// background decorations
+(function(){
+  const bg=document.getElementById('bg'),em=['⭐','🌈','🎈','✏️','📚','🦋','🌸','☁️','🎨','🍎','🦄','🌟'];
+  for(let i=0;i<22;i++){const s=document.createElement('span');s.textContent=em[i%em.length];
+    s.style.left=Math.random()*96+'%';s.style.top=Math.random()*94+'%';
+    s.style.animationDelay=(Math.random()*8)+'s';s.style.fontSize=(1.3+Math.random()*1.6)+'rem';bg.appendChild(s);}
+  for(let i=0;i<4;i++){const c=document.createElement('div');c.className='cloud';
+    c.style.width=(110+Math.random()*90)+'px';c.style.height='38px';c.style.top=(5+i*22)+'%';
+    c.style.animationDuration=(35+i*12)+'s';c.style.animationDelay=(-i*10)+'s';bg.appendChild(c);}
+})();
+document.getElementById('pdate').valueAsDate=new Date();
+
+// marking scheme
+const has=v=>v.trim().length>=2;
+const word=v=>/^[a-zA-Z][a-zA-Z\s'\-]{1,}$/.test(v.trim());
+const opt=list=>v=>list.includes(v.trim().toLowerCase().replace(/[.!]/g,''));
+const ageOk=v=>{const t=v.trim().toLowerCase();const n=parseInt(t);
+  return (!isNaN(n)&&n>=3&&n<=12)||['three','four','five','six','seven','eight','nine','ten','eleven','twelve'].some(w=>t.startsWith(w));};
+const S=[
+ {n:'About Me',c:'#4d9de0',q:[
+  {k:'name1',l:'My name is …',t:has,m:'Type your name'},
+  {k:'age',l:'I am … years old',t:ageOk,m:'Age (e.g. 6)'},
+  {k:'gender',l:'I am a … (boy/girl)',t:opt(['boy','girl']),m:'boy or girl',a:'boy / girl'},
+  {k:'school',l:'I attend … School',t:has,m:'School name'},
+  {k:'fam1',l:'I live with my … (1st)',t:word,m:'Family member'},
+  {k:'fam2',l:'… and … (2nd)',t:word,m:'Family member'}]},
+ {n:'My Favorites',c:'#ff6fa5',q:[
+  {k:'food',l:'Favorite meal',t:word,m:'A meal'},
+  {k:'snack',l:'Favorite sweet snack',t:word,m:'A snack'},
+  {k:'toy',l:'Favorite toy',t:word,m:'A toy'},
+  {k:'place',l:'Play in the … (room/garden)',t:opt(['room','garden','the room','the garden']),m:'room or garden',a:'room / garden'},
+  {k:'color',l:'Favorite color',t:word,m:'A color'},
+  {k:'animal',l:'Favorite animal',t:word,m:'An animal'}]},
+ {n:'How I Look',c:'#3bb78f',q:[
+  {k:'hair',l:'… hair (short/long)',t:opt(['short','long']),m:'short or long',a:'short / long'},
+  {k:'eyes',l:'Eye color',t:word,m:'A color'},
+  {k:'smile',l:'A big, bright …',t:word,m:'A word (e.g. smile)'}]},
+ {n:'Who I Am Inside',c:'#7b5cd6',q:[
+  {k:'kind',l:'Inside, I am very … (kind/wicked)',t:opt(['kind']),m:'Correct word: kind',a:'kind'},
+  {k:'gen',l:'My friends say I am … (share/generous)',t:opt(['generous']),m:'Correct word: generous',a:'generous'},
+  {k:'best',l:'I try my best to be …',t:word,m:'A word (e.g. patient)'},
+  {k:'feel',l:'I feel so …',t:word,m:'A feeling (e.g. happy)'},
+  {k:'special',l:'I am special and …',t:word,m:'A word (e.g. brave)'}]}
+];
+const inputs=[...document.querySelectorAll('[data-k]')];
+const total=inputs.length;
+function prog(){const f=inputs.filter(i=>i.value.trim()).length;
+  document.getElementById('plabel').textContent=f+' of '+total+' spaces filled';
+  document.getElementById('pbar').style.width=(f/total*100)+'%';}
+inputs.forEach(i=>i.addEventListener('input',prog));
+// keep name fields in sync
+const pn=document.getElementById('pname'),n1=document.querySelector('[data-k=name1]');
+pn.addEventListener('input',()=>{if(!n1.dataset.t){n1.value=pn.value;prog();}});
+n1.addEventListener('input',()=>n1.dataset.t=1);
+
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+document.getElementById('submit').onclick=function(){
+  const empty=inputs.filter(i=>!i.value.trim()).length;
+  const warn=document.getElementById('warn');
+  if(!pn.value.trim()){warn.textContent='Please type your name at the top first! 😊';pn.focus();pn.scrollIntoView({behavior:'smooth',block:'center'});return;}
+  if(empty&&!confirm(empty+' space(s) are still empty. Submit anyway?'))return;
+  warn.textContent='';
+  const val={};inputs.forEach(i=>val[i.dataset.k]=i.value);
+  let score=0,rows='',secs='';
+  S.forEach((s,si)=>{let ss=0;
+    s.q.forEach((q,qi)=>{const v=val[q.k]||'';const ok=v.trim()&&q.t(v);if(ok){ss++;score++;}
+      rows+=`<tr><td>${si+1}.${qi+1}</td><td>${q.l}</td><td>${v.trim()?esc(v):'<i>(blank)</i>'}</td>
+      <td>${ok?'<span class="ok">✔ 1</span>':'<span class="no">✘ 0</span>'}</td>
+      <td>${ok?'':(v.trim()?'Check: '+(q.a||'a sensible word'):'Not answered: '+(q.a||q.m))}</td></tr>`;});
+    rows+=`<tr class="sub"><td colspan="3">${s.n} – Sub-total</td><td colspan="2">${ss} / ${s.q.length}</td></tr>`;
+    const p=Math.round(ss/s.q.length*100);
+    secs+=`<p style="margin:8px 0 2px"><b>${s.n}</b> — ${ss}/${s.q.length} (${p}%)</p><div class="secbar"><i style="width:${p}%;background:${s.c}"></i></div>`;});
+  document.getElementById('detail').innerHTML='<tr><th>No.</th><th>Question</th><th>Answer</th><th>Mark</th><th>Comment</th></tr>'+rows;
+  document.getElementById('secsum').innerHTML=secs;
+  const pct=Math.round(score/total*100);
+  let g,r,t;
+  if(pct>=90){g='A – Excellent';r='Wow! Brilliant writing! You are a super star!';t='🏆';}
+  else if(pct>=75){g='B – Very Good';r='Great job! Keep up the good work!';t='🥇';}
+  else if(pct>=60){g='C – Good';r='Well done! A little more practice and you will shine!';t='🥈';}
+  else if(pct>=50){g='D – Fair';r='Nice try! Read carefully and keep practising.';t='🥉';}
+  else{g='E – Keep Trying';r='Do not give up! Let us practise together.';t='🌱';}
+  document.getElementById('trophy').textContent=t;
+  document.getElementById('rname').textContent=pn.value.trim();
+  document.getElementById('rdate').textContent='Creative Writing • '+(document.getElementById('pdate').value||'');
+  document.getElementById('rscore').textContent=score+' / '+total;
+  document.getElementById('rgrade').textContent=g+' ('+pct+'%)';
+  document.getElementById('rremark').textContent=r;
+  document.getElementById('chips').innerHTML=
+   `<div class="chip">${score}<small>Correct</small></div><div class="chip">${total-score}<small>Needs work</small></div>
+    <div class="chip">${total-inputs.filter(i=>i.value.trim()).length}<small>Left blank</small></div><div class="chip">${pct}%<small>Percentage</small></div>`;
+  document.getElementById('test').style.display='none';
+  document.getElementById('result').style.display='block';
+  window.scrollTo({top:0,behavior:'smooth'});
+};
+</script>
+</body>
+</html>
